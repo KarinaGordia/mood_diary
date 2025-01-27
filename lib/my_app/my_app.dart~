@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-        create: (_) => EmotionsScreenViewModel(),
-        child: const EmotionsScreen(),
+        create: (_) => EmotionScreenViewModel(),
+        child: const EmotionScreen(),
       ),
     );
   }
