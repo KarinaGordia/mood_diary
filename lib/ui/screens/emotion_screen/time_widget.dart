@@ -1,53 +1,56 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_diary/resources/images.dart';
-import 'package:mood_diary/ui/theme/app_colors.dart';
+import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
+import 'package:provider/provider.dart';
 
-class EmotionsScreen extends StatelessWidget {
-  const EmotionsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: FlexibleSpaceBar(
-          centerTitle: true,
-          titlePadding: EdgeInsets.zero,
-          title: const TimeWidget(),
-        ),
-      ),
-    );
-  }
-}
-
-class TimeWidget extends StatelessWidget {
+class TimeWidget extends StatefulWidget {
   const TimeWidget({super.key});
 
   @override
+  State<TimeWidget> createState() => _TimeWidgetState();
+}
+
+class _TimeWidgetState extends State<TimeWidget> {
+  @override
+  void initState() {
+    final model = context.read<EmotionsScreenViewModel>();
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      model.updateTime();
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final model = context.watch<EmotionsScreenViewModel>();
+    final dateTitle = model.createTitle();
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10,),
+      padding: const EdgeInsets.only(
+        bottom: 10,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             width: 24,
           ),
           Expanded(
             child: Text(
-              '27 января 18:00',
-              //'${model?.day} ${TimeWidgetModel.russianMonthsInGenitiveCase[model?.monthIndex]} ${model?.time}',
+              dateTitle,
               textAlign: TextAlign.center,
               style: AppTextStyles.appBarTimeTitle,
             ),
           ),
           IconButton(
             padding: EdgeInsets.zero,
-            iconSize: 24,
             style: ButtonStyle(
               padding: const WidgetStatePropertyAll(EdgeInsets.zero),
-              fixedSize: WidgetStateProperty.all(const Size(24, 24)),
             ),
             onPressed: () {},
             icon: SvgPicture.asset(Images.calendarIcon),
