@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_diary/resources/images.dart';
+import 'package:mood_diary/ui/theme/app_colors.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
 
 class EmotionsScreen extends StatelessWidget {
@@ -36,6 +37,7 @@ class TimeWidget extends StatelessWidget {
           Expanded(
             child: Text(
               '27 января 18:00',
+              //'${model?.day} ${TimeWidgetModel.russianMonthsInGenitiveCase[model?.monthIndex]} ${model?.time}',
               textAlign: TextAlign.center,
               style: AppTextStyles.appBarTimeTitle,
             ),

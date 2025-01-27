@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mood_diary/ui/theme/app_colors.dart';
+
+final appTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mandarin),
+  primaryColor: AppColors.mandarin,
+  scaffoldBackgroundColor: AppColors.backgroundLight,
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.backgroundLight,
+    surfaceTintColor: AppColors.backgroundLight,
+    titleTextStyle: TextStyle(
+      fontFamily: GoogleFonts.nunito().fontFamily,
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      color: AppColors.grey2,
+    ),
+    toolbarTextStyle: TextStyle(
+      fontFamily: GoogleFonts.nunito().fontFamily,
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      color: AppColors.grey2,
+    ),
+  ),
+  textTheme: TextTheme(
+    displayLarge: ,
+    displayMedium: ,
+    displaySmall: ,
+    headlineLarge: ,
+    headlineMedium: ,
+    headlineSmall: ,
+    titleLarge: ,
+    titleMedium: ,
+    titleSmall: ,
+    bodyLarge: ,
+    bodyMedium: ,
+    bodySmall: ,
+  ),
+);
