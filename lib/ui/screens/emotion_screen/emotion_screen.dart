@@ -12,7 +12,7 @@ class EmotionsScreen extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: true,
-          titlePadding: EdgeInsets.zero,
+          titlePadding: EdgeInsets.symmetric(horizontal: 20),
           title: const TimeWidget(),
         ),
       ),

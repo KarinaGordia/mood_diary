@@ -27,20 +27,19 @@ class _EmotionScreenTabsState extends State<EmotionScreenTabs>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(47.0),
-          clipBehavior: Clip.hardEdge,
-          child: Container(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: 30,
+        children: [
+          Container(
             height: 30,
-            margin: const EdgeInsets.symmetric(horizontal: 44),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(47.0),
               color: AppColors.grey4,
             ),
             child: TabBar(
-
               tabAlignment: TabAlignment.start,
               controller: _tabController,
               isScrollable: true,
@@ -56,27 +55,27 @@ class _EmotionScreenTabsState extends State<EmotionScreenTabs>
               ],
             ),
           ),
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              Center(
-                child: Text(
-                  'Здесь будет отображаться ваш дневник настроения',
-                  style: Theme.of(context).textTheme.labelLarge,
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Center(
+                  child: Text(
+                    'Здесь будет отображаться ваш дневник настроения',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
                 ),
-              ),
-              Center(
-                child: Text(
-                  'Здесь будет отображаться ваша статистика',
-                  style: Theme.of(context).textTheme.labelLarge,
+                Center(
+                  child: Text(
+                    'Здесь будет отображаться ваша статистика',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

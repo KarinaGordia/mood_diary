@@ -1,13 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mood_diary/resources/images.dart';
-import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
+import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_tabs.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/time_widget.dart';
-import 'package:mood_diary/ui/theme/app_colors.dart';
-import 'package:mood_diary/ui/theme/app_text_styles.dart';
-import 'package:provider/provider.dart';
+
 
 class EmotionsScreen extends StatelessWidget {
   const EmotionsScreen({super.key});
@@ -22,59 +16,9 @@ class EmotionsScreen extends StatelessWidget {
           title: const TimeWidget(),
         ),
       ),
-      body: EmotionScreenBody(),
+      body: EmotionScreenTabs(),
     );
   }
 }
 
-class EmotionScreenBody extends StatefulWidget {
-  const EmotionScreenBody({super.key});
-
-  @override
-  State<EmotionScreenBody> createState() => _EmotionScreenBodyState();
-}
-
-class _EmotionScreenBodyState extends State<EmotionScreenBody> with TickerProviderStateMixin {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 30,
-          margin: const EdgeInsets.symmetric(horizontal: 44),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(47.0),
-            color: AppColors.grey4,
-          ),
-          child: TabBar(
-            tabAlignment: TabAlignment.start,
-            controller: _tabController,
-            isScrollable: true,
-            tabs: const [
-              TabWidget(label:'Дневник настроения',icon: AppIcons.diary,),
-              TabWidget(label:'Статистика',icon: AppIcons.statistic,),
-            ],
-          ),
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              MoodDiaryWidgetModelProvider(
-                model: _moodDiaryModel,
-                child: const MoodDiaryWidget(),
-              ),
-              Center(
-                child: Text(
-                  'Здесь будет отображаться ваша статистика',
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
 
