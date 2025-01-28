@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_diary/resources/app_icons.dart';
+import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 
 class EmotionScreenTabs extends StatefulWidget {
@@ -59,12 +60,7 @@ class _EmotionScreenTabsState extends State<EmotionScreenTabs>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Center(
-                  child: Text(
-                    'Здесь будет отображаться ваш дневник настроения',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                ),
+                MoodDiaryTab(),
                 Center(
                   child: Text(
                     'Здесь будет отображаться ваша статистика',

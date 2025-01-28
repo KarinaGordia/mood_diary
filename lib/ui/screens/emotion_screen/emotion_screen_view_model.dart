@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EmotionsScreenViewModel extends ChangeNotifier{
+
   var day = DateTime.now().day;
   var monthIndex = DateTime.now().month;
   static const russianMonthsInGenitiveCase = <int, String>{
