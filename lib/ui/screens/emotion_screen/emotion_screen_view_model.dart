@@ -1,23 +1,119 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mood_diary/domain/entity/feeling.dart';
+import 'package:mood_diary/resources/app_images.dart';
 
-class EmotionsScreenViewModel extends ChangeNotifier{
+class EmotionsScreenViewModel extends ChangeNotifier {
+  final _feelings = <Feeling>[
+    Feeling(name: 'Радость', imagePath: AppImages.joy, subFeelings: [
+      'Возбуждение',
+      'Восторг',
+      'Игривость',
+      'Наслаждение',
+      'Очарование',
+      'Осознанность',
+      'Смелость',
+      'Удовольствие',
+      'Чувственность',
+      'Энергичность',
+      'Экстравагантность'
+    ]),
+    Feeling(name: 'Страх', imagePath: AppImages.fear, subFeelings: [
+      'Тревога',
+      'Паника',
+      'Беспокойство',
+      'Опасение',
+      'Ужас',
+      'Нервозность',
+      'Паранойя',
+      'Неуверенность',
+      'Напряженность',
+      'Шок'
+    ]),
+    Feeling(name: 'Бешенство', imagePath: AppImages.rage, subFeelings: [
+      'Ярость',
+      'Злоба',
+      'Гнев',
+      'Обида',
+      'Раздражение',
+      'Атака',
+      'Агрессия',
+      'Взрыв',
+      'Неприязнь',
+      'Враждебность'
+    ]),
+    Feeling(name: 'Грусть', imagePath: AppImages.sadness, subFeelings: [
+      'Печаль',
+      'Тоска',
+      'Грусть',
+      'Разочарование',
+      'Одиночество',
+      'Уныние',
+      'Жалость к себе',
+      'Безнадежность',
+      'Тревожность',
+      'Опустошение'
+    ]),
+    Feeling(name: 'Спокойствие', imagePath: AppImages.calmness, subFeelings: [
+      'Расслабленность',
+      'Умиротворение',
+      'Баланс',
+      'Гармония',
+      'Безмятежность',
+      'Покой',
+      'Стабильность',
+      'Непоколебимость',
+      'Отрешенность'
+    ]),
+    Feeling(name: 'Сила', imagePath: AppImages.strength, subFeelings: [
+      'Мощь',
+      'Храбрость',
+      'Стойкость',
+      'Настойчивость',
+      'Дерзость',
+      'Выносливость',
+      'Воля',
+      'Независимость',
+      'Уверенность',
+      'Твердость'
+    ]),
+  ];
+
+  List<Feeling> get feelings => _feelings;
+
+  final List<Feeling> _selectedFeelings = [];
+  List<Feeling> get selectedFeelings => _selectedFeelings.toList();
+
+  void selectFeeling(Feeling feeling) {
+    feeling.isSelected = !feeling.isSelected;
+    log('in model: feeling ${feeling.name} ${feeling.isSelected}');
+
+    if (_selectedFeelings.contains(feeling)) {
+      _selectedFeelings.remove(feeling);
+    } else {
+      _selectedFeelings.add(feeling);
+    }
+
+    notifyListeners();
+  }
 
   var day = DateTime.now().day;
   var monthIndex = DateTime.now().month;
   static const russianMonthsInGenitiveCase = <int, String>{
-    1:'января',
-    2:'февраля',
-    3:'марта',
-    4:'апреля',
-    5:'мая',
-    6:'июня',
-    7:'июля',
-    8:'августа',
-    9:'сентября',
-    10:'октября',
-    11:'ноября',
-    12:'декабря',
+    1: 'января',
+    2: 'февраля',
+    3: 'марта',
+    4: 'апреля',
+    5: 'мая',
+    6: 'июня',
+    7: 'июля',
+    8: 'августа',
+    9: 'сентября',
+    10: 'октября',
+    11: 'ноября',
+    12: 'декабря',
   };
 
   var time = DateFormat.Hm().format(DateTime.now());
@@ -29,6 +125,6 @@ class EmotionsScreenViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  String createTitle() => '$day ${russianMonthsInGenitiveCase[monthIndex]} $time';
-
+  String createTitle() =>
+      '$day ${russianMonthsInGenitiveCase[monthIndex]} $time';
 }
