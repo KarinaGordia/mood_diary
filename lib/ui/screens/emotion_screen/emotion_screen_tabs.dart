@@ -28,49 +28,51 @@ class _EmotionScreenTabsState extends State<EmotionScreenTabs>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 30,
-        children: [
-          Container(
-            height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(47.0),
-              color: AppColors.grey4,
-            ),
-            child: TabBar(
-              tabAlignment: TabAlignment.start,
-              controller: _tabController,
-              isScrollable: true,
-              tabs: const [
-                _TabWidget(
-                  label: 'Дневник настроения',
-                  icon: AppIcons.diary,
-                ),
-                _TabWidget(
-                  label: 'Статистика',
-                  icon: AppIcons.statistic,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                MoodDiaryTab(),
-                Center(
-                  child: Text(
-                    'Здесь будет отображаться ваша статистика',
-                    style: Theme.of(context).textTheme.labelLarge,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 30,
+          children: [
+            Container(
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(47.0),
+                color: AppColors.grey4,
+              ),
+              child: TabBar(
+                tabAlignment: TabAlignment.start,
+                controller: _tabController,
+                isScrollable: true,
+                tabs: const [
+                  _TabWidget(
+                    label: 'Дневник настроения',
+                    icon: AppIcons.diary,
                   ),
-                ),
-              ],
+                  _TabWidget(
+                    label: 'Статистика',
+                    icon: AppIcons.statistic,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  MoodDiaryTab(),
+                  Center(
+                    child: Text(
+                      'Здесь будет отображаться ваша статистика',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -12,27 +12,24 @@ class SlidersSection extends StatelessWidget {
     final stressLevelValue = context.select((EmotionsScreenViewModel model) => model.stressLevelValue);
     final selfEsteemValue = context.select((EmotionsScreenViewModel model) => model.selfEsteemValue);
     final isFeelingSelected = context.select((EmotionsScreenViewModel model) => model.selectedFeelings).isNotEmpty;
-    return Padding(
-      padding: const EdgeInsets.only(right: 20.0),
-      child: Column(
-        spacing: 20,
-        children: [
-          CustomSliderWidget(
-            title: 'Уровень стресса',
-            minValueName: 'Низкий',
-            maxValueName: 'Высокий',
-            currentValue: stressLevelValue,
-            onChanged: isFeelingSelected ? model.changeStressLevelValue : null,
-          ),
-          CustomSliderWidget(
-            title: 'Самооценка',
-            minValueName: 'Неуверенность',
-            maxValueName: 'Уверенность',
-            currentValue: selfEsteemValue,
-            onChanged: isFeelingSelected ? model.changeSelfEsteemValue : null,
-          ),
-        ],
-      ),
+    return Column(
+      spacing: 20,
+      children: [
+        CustomSliderWidget(
+          title: 'Уровень стресса',
+          minValueName: 'Низкий',
+          maxValueName: 'Высокий',
+          currentValue: stressLevelValue,
+          onChanged: isFeelingSelected ? model.changeStressLevelValue : null,
+        ),
+        CustomSliderWidget(
+          title: 'Самооценка',
+          minValueName: 'Неуверенность',
+          maxValueName: 'Уверенность',
+          currentValue: selfEsteemValue,
+          onChanged: isFeelingSelected ? model.changeSelfEsteemValue : null,
+        ),
+      ],
     );
   }
 }
