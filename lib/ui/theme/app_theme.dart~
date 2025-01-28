@@ -23,7 +23,6 @@ abstract class AppTheme {
         fontFamily: GoogleFonts.nunito().fontFamily,
         fontWeight: FontWeight.w500,
         fontSize: 12,
-        height: 22/12,
         color: AppColors.white,
       ),
       unselectedLabelColor: AppColors.grey2,

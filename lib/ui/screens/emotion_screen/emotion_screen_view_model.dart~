@@ -98,11 +98,6 @@ class EmotionsScreenViewModel extends ChangeNotifier {
 
     if (_selectedFeelings.contains(feeling)) {
       _selectedFeelings.remove(feeling);
-
-      for(var subFeeling in feeling.subFeelings) {
-        _selectedSubFeelings.remove(subFeeling);
-      }
-
     } else {
       _selectedFeelings.add(feeling);
     }

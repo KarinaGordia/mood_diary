@@ -5,6 +5,7 @@ import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/resources/app_images.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
+import 'package:mood_diary/ui/theme/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class MoodDiaryTab extends StatelessWidget {
@@ -41,6 +42,7 @@ class MoodDiaryTab extends StatelessWidget {
             },
           ),
         ),
+        const SubFeelingsSectionWidget(),
       ],
     );
   }
@@ -64,7 +66,7 @@ class FeelingButtonWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         model.selectFeeling(feeling);
-        // model.getSubFeelingList();
+        model.getSubFeelingList();
       },
       borderRadius: BorderRadius.circular(76),
       child: Container(
@@ -92,11 +94,63 @@ class FeelingButtonWidget extends StatelessWidget {
             ),
             Text(
               feeling.name,
-              style: Theme.of(context).textTheme.labelSmall,
+              style: AppTextStyles.basic,
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class SubFeelingsSectionWidget extends StatelessWidget {
+  const SubFeelingsSectionWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final subFeelings =
+        context.select((EmotionsScreenViewModel model) => model.subFeelings);
+    return Container(
+      padding: subFeelings.isNotEmpty
+          ? const EdgeInsets.only(top: 15, right: 20)
+          : null,
+      child: Wrap(
+        runAlignment: WrapAlignment.start,
+        runSpacing: -4,
+        spacing: 8,
+        children: subFeelings.map((String subFeeling) {
+          return SubFeelingWidget(
+            subFeeling: subFeeling,
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+class SubFeelingWidget extends StatelessWidget {
+  const SubFeelingWidget({super.key, required this.subFeeling});
+
+  final String subFeeling;
+
+  @override
+  Widget build(BuildContext context) {
+    bool isSelected = context
+        .select((EmotionsScreenViewModel model) => model.selectedSubFeelings)
+        .contains(subFeeling);
+    final selectSubFeeling =
+        context.read<EmotionsScreenViewModel>().selectSubFeeling;
+    return FilterChip(
+      visualDensity: const VisualDensity(
+        vertical: -2,
+      ),
+      label: Text(subFeeling),
+      labelStyle: Theme.of(context)
+          .chipTheme
+          .labelStyle
+          ?.copyWith(color: isSelected ? AppColors.white : AppColors.black),
+      selected: isSelected,
+      onSelected: (bool value) => selectSubFeeling(subFeeling, isSelected),
     );
   }
 }
