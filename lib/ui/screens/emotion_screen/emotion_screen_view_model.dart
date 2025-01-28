@@ -149,6 +149,30 @@ class EmotionsScreenViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  final textFieldController = TextEditingController();
+
+  String? _noteText;
+
+  void takeNote(String text) {
+    final noteText = text.isNotEmpty ? text : null;
+    _noteText = noteText?.trim();
+    log(_noteText ?? 'no note');
+  }
+
+  bool isNoteTextEmpty() {
+    final noteText = _noteText;
+    return noteText != null && noteText.isNotEmpty;
+  }
+
+  // set noteText(String value) {
+  //   final isTaskTextEmpty = _noteText.trim().isEmpty;
+  //   _noteText = value;
+  //
+  //   if(value.trim().isEmpty != isTaskTextEmpty) {
+  //     notifyListeners();
+  //   }
+  // }
+
   var day = DateTime.now().day;
   var monthIndex = DateTime.now().month;
   static const russianMonthsInGenitiveCase = <int, String>{

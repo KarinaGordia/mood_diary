@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/feelings_section.dart';
+import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/notes_section.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/sliders_section.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
@@ -18,10 +19,19 @@ class MoodDiaryTab extends StatelessWidget {
     final model = context.read<EmotionsScreenViewModel>();
 
     return Column(
-      spacing: 20,
       children: [
-        FeelingsSection(),
-        SlidersSection(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: 20,
+              children: [
+                FeelingsSection(),
+                SlidersSection(),
+                NotesSection(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
