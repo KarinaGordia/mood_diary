@@ -84,30 +84,31 @@ class EmotionsScreenViewModel extends ChangeNotifier {
   List<Feeling> get feelings => _feelings;
 
   final List<Feeling> _selectedFeelings = [];
+
   List<Feeling> get selectedFeelings => _selectedFeelings.toList();
 
   final List<String> _selectedSubFeelings = [];
+
   List<String> get selectedSubFeelings => _selectedSubFeelings.toList();
 
   final List<String> _displayedSubFeelings = [];
+
   List<String> get subFeelings => _displayedSubFeelings.toList();
 
   void selectFeeling(Feeling feeling) {
     feeling.isSelected = !feeling.isSelected;
-    log('in model: feeling ${feeling.name} ${feeling.isSelected}');
 
     if (_selectedFeelings.contains(feeling)) {
       _selectedFeelings.remove(feeling);
 
-      for(var subFeeling in feeling.subFeelings) {
+      for (var subFeeling in feeling.subFeelings) {
         _selectedSubFeelings.remove(subFeeling);
       }
 
-      if(selectedFeelings.isEmpty) {
+      if (selectedFeelings.isEmpty) {
         changeStressLevelValue(0.5);
         changeSelfEsteemValue(0.5);
       }
-
     } else {
       _selectedFeelings.add(feeling);
     }
@@ -134,9 +135,11 @@ class EmotionsScreenViewModel extends ChangeNotifier {
   }
 
   double _stressLevelValue = 0.5;
+
   double get stressLevelValue => _stressLevelValue;
 
   double _selfEsteemValue = 0.5;
+
   double get selfEsteemValue => _selfEsteemValue;
 
   void changeStressLevelValue(double value) {
@@ -154,24 +157,21 @@ class EmotionsScreenViewModel extends ChangeNotifier {
   String? _noteText;
 
   void takeNote(String text) {
-    final noteText = text.isNotEmpty ? text : null;
-    _noteText = noteText?.trim();
-    log(_noteText ?? 'no note');
+    final noteText = text.trim().isNotEmpty ? text : null;
+
+    if (noteText != null) {
+      notifyListeners();
+    }
+
+    _noteText = noteText;
   }
 
-  bool isNoteTextEmpty() {
-    final noteText = _noteText;
-    return noteText != null && noteText.isNotEmpty;
+  bool isDiaryFilled() {
+    bool isNoteTextNotEmpty = _noteText != null && _noteText!.isNotEmpty;
+    return _selectedFeelings.isNotEmpty &&
+        _selectedSubFeelings.isNotEmpty &&
+        isNoteTextNotEmpty;
   }
-
-  // set noteText(String value) {
-  //   final isTaskTextEmpty = _noteText.trim().isEmpty;
-  //   _noteText = value;
-  //
-  //   if(value.trim().isEmpty != isTaskTextEmpty) {
-  //     notifyListeners();
-  //   }
-  // }
 
   var day = DateTime.now().day;
   var monthIndex = DateTime.now().month;
