@@ -29,34 +29,29 @@ class _TimeWidgetState extends State<TimeWidget> {
   Widget build(BuildContext context) {
     final model = context.watch<EmotionsScreenViewModel>();
     final dateTitle = model.createTitle();
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            width: 24,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(
+          width: 24,
+        ),
+        Expanded(
+          child: Text(
+            dateTitle,
+            textAlign: TextAlign.center,
+            style: AppTextStyles.appBarTimeTitle,
           ),
-          Expanded(
-            child: Text(
-              dateTitle,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.appBarTimeTitle,
-            ),
+        ),
+        IconButton(
+          padding: EdgeInsets.zero,
+          style: ButtonStyle(
+            padding: const WidgetStatePropertyAll(EdgeInsets.zero),
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            style: ButtonStyle(
-              padding: const WidgetStatePropertyAll(EdgeInsets.zero),
-            ),
-            onPressed: () {},
-            icon: SvgPicture.asset(AppImages.calendarIcon),
-          ),
-        ],
-      ),
+          onPressed: () {},
+          icon: SvgPicture.asset(AppImages.calendarIcon),
+        ),
+      ],
     );
   }
 }
