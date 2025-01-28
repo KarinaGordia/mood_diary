@@ -1,0 +1,7 @@
+class Images {
+  Images._();
+
+  static const String calendarIcon = 'assets/images/calendar_icon.svg';
+  static const String diaryIcon = 'assets/images/diary_icon.svg';
+  static const String statisticsIcon = 'assets/images/statistics_icon.svg';
+}
