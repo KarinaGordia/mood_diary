@@ -103,6 +103,11 @@ class EmotionsScreenViewModel extends ChangeNotifier {
         _selectedSubFeelings.remove(subFeeling);
       }
 
+      if(selectedFeelings.isEmpty) {
+        changeStressLevelValue(0.5);
+        changeSelfEsteemValue(0.5);
+      }
+
     } else {
       _selectedFeelings.add(feeling);
     }
@@ -126,6 +131,22 @@ class EmotionsScreenViewModel extends ChangeNotifier {
     for (var feeling in _selectedFeelings) {
       _displayedSubFeelings.addAll(feeling.subFeelings);
     }
+  }
+
+  double _stressLevelValue = 0.5;
+  double get stressLevelValue => _stressLevelValue;
+
+  double _selfEsteemValue = 0.5;
+  double get selfEsteemValue => _selfEsteemValue;
+
+  void changeStressLevelValue(double value) {
+    _stressLevelValue = value;
+    notifyListeners();
+  }
+
+  void changeSelfEsteemValue(double value) {
+    _selfEsteemValue = value;
+    notifyListeners();
   }
 
   var day = DateTime.now().day;

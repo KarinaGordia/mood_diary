@@ -23,4 +23,5 @@ abstract class AppTextStyles {
     height: 15 / 11,
     color: AppColors.black,
   );
+
 }
