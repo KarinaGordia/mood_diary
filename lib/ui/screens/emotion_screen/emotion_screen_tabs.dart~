@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_diary/resources/app_icons.dart';
-import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/mood_diary_tab.dart';
+import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 
 class EmotionScreenTabs extends StatefulWidget {

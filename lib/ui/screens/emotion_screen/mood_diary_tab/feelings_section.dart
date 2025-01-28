@@ -1,26 +1,22 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mood_diary/domain/entity/feeling.dart';
-import 'package:mood_diary/resources/app_images.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
-class MoodDiaryTab extends StatelessWidget {
-  const MoodDiaryTab({super.key});
+class FeelingsSection extends StatelessWidget {
+  const FeelingsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    log('MoodDiaryTab build');
     final feelings = context.read<EmotionsScreenViewModel>().feelings;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Что чувствуешь?',
-          style: Theme.of(context).textTheme.labelLarge,
+          style: AppTextStyles.sectionTitle,
         ),
         Container(
           height: 118,
@@ -55,13 +51,12 @@ class FeelingButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('feeling call: ${feeling.name} ${feeling.isSelected}');
     final model = context.read<EmotionsScreenViewModel>();
     final isSelected = context
         .select((EmotionsScreenViewModel model) => model.selectedFeelings)
         .contains(feeling);
     final border =
-        isSelected ? Border.all(color: AppColors.mandarin, width: 2) : null;
+    isSelected ? Border.all(color: AppColors.mandarin, width: 2) : null;
 
     return InkWell(
       onTap: () {
@@ -109,7 +104,7 @@ class SubFeelingsSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subFeelings =
-        context.select((EmotionsScreenViewModel model) => model.subFeelings);
+    context.select((EmotionsScreenViewModel model) => model.subFeelings);
     return Container(
       padding: subFeelings.isNotEmpty
           ? const EdgeInsets.only(top: 15, right: 20)
