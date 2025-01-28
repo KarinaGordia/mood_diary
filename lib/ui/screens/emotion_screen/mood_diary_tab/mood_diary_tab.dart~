@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/feelings_section.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/notes_section.dart';
@@ -42,6 +39,7 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final resetSelection = context.read<EmotionsScreenViewModel>().resetSelection;
     final isDiaryFilled = context
         .select((EmotionsScreenViewModel model) => model.isDiaryFilled());
     return Padding(
@@ -52,7 +50,15 @@ class SaveButton extends StatelessWidget {
                 ? const WidgetStatePropertyAll(AppColors.mandarin)
                 : null,
           ),
-          onPressed: isDiaryFilled ? () {} : null,
+          onPressed: isDiaryFilled ? () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text('Запись успешно сохранена!'),
+              ),
+            );
+            resetSelection();
+          } : null,
           child: const Text('Сохранить')),
     );
   }

@@ -58,6 +58,15 @@ abstract class AppTheme {
         color: AppColors.black,
       ),
     ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: AppColors.white,
+      contentTextStyle: TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        color: AppColors.black,
+      ),
+    ),
     filledButtonTheme: FilledButtonThemeData(
       style: ButtonStyle(
         textStyle: WidgetStatePropertyAll(

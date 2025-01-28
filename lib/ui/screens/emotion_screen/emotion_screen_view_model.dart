@@ -173,6 +173,24 @@ class EmotionsScreenViewModel extends ChangeNotifier {
         isNoteTextNotEmpty;
   }
 
+  void resetSelection() {
+    for(var feeling in _feelings) {
+      feeling.isSelected = false;
+    }
+
+    _selectedFeelings.clear();
+    _selectedSubFeelings.clear();
+    _displayedSubFeelings.clear();
+
+    changeStressLevelValue(0.5);
+    changeSelfEsteemValue(0.5);
+
+    textFieldController.clear();
+    _noteText = null;
+
+    notifyListeners();
+  }
+
   var day = DateTime.now().day;
   var monthIndex = DateTime.now().month;
   static const russianMonthsInGenitiveCase = <int, String>{

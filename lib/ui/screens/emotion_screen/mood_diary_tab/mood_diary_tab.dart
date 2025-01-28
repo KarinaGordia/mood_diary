@@ -37,8 +37,18 @@ class MoodDiaryTab extends StatelessWidget {
 class SaveButton extends StatelessWidget {
   const SaveButton({super.key});
 
+  void _showSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text('Запись успешно сохранена!'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final resetSelection = context.read<EmotionsScreenViewModel>().resetSelection;
     final isDiaryFilled = context
         .select((EmotionsScreenViewModel model) => model.isDiaryFilled());
     return Padding(
@@ -49,7 +59,10 @@ class SaveButton extends StatelessWidget {
                 ? const WidgetStatePropertyAll(AppColors.mandarin)
                 : null,
           ),
-          onPressed: isDiaryFilled ? () {} : null,
+          onPressed: isDiaryFilled ? () => {
+            _showSnackBar(context),
+            resetSelection(),
+          } : null,
           child: const Text('Сохранить')),
     );
   }
