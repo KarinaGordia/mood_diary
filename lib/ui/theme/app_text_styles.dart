@@ -36,11 +36,11 @@ abstract class AppTextStyles {
     color: AppColors.grey2,
   );
 
-  final today = TextStyle(
+  static TextStyle today = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 18,
-    height: 22 / 18,
+    // height: 22 / 18,
     color: AppColors.grey2,
   );
 
