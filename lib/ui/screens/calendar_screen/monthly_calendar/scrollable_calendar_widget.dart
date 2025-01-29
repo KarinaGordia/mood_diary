@@ -32,7 +32,6 @@ class ScrollableCalendarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.read<CalendarScreenViewModel>();
-    final selectedDate = model.selectedMonthDate ?? CalendarFunctions.todayFormatted;
 
     return Expanded(
       child: CustomScrollView(
@@ -40,14 +39,14 @@ class ScrollableCalendarWidget extends StatelessWidget {
         anchor: 0,
         center: _initialMonthKey,
         slivers: [
-          _getList(false, selectedDate),
+          _getList(false, model.selectedMonthDate),
           SliverToBoxAdapter(
             key: _initialMonthKey,
             child: MonthWidget(
-              monthDate: selectedDate,
+              monthDate: model.selectedMonthDate,
             ),
           ),
-          _getList(true, selectedDate),
+          _getList(true, model.selectedMonthDate),
         ],
       )
     );

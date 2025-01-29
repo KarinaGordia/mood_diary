@@ -6,11 +6,16 @@ abstract class CalendarFunctions {
   static bool isToday(DateTime date) {
     return todayFormatted.compareTo(date) == 0;
   }
+
+  static bool isSameDate(DateTime firstDate, DateTime secondDate) {
+    return firstDate.compareTo(secondDate) == 0;
+  }
 }
 
 class CalendarScreenViewModel extends ChangeNotifier {
   CalendarScreenViewModel() {
-    selectedMonthDate = CalendarFunctions.todayFormatted;
+    _selectedDay = CalendarFunctions.todayFormatted;
+    _selectedMonthDate = CalendarFunctions.todayFormatted;
   }
 
   static const russianDaysOfWeek = <String>[
@@ -38,7 +43,18 @@ class CalendarScreenViewModel extends ChangeNotifier {
     'Декабрь',
   ];
 
-  DateTime? selectedMonthDate;
+  late DateTime _selectedMonthDate;
+  DateTime get selectedMonthDate => _selectedMonthDate;
+
+  late DateTime _selectedDay;
+  DateTime get selectedDay => _selectedDay;
+
+  void selectDay(DateTime date) {
+    if(_selectedDay != date) {
+      _selectedDay = date;
+      notifyListeners();
+    }
+  }
 
   List<DateTime> generateMonthCells(DateTime monthDate) {
     var cells = <DateTime>[];

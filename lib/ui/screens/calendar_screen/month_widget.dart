@@ -92,20 +92,29 @@ class _DayCellWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final day = date.day.toString();
     final bool isToday = CalendarFunctions.isToday(date);
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        if(isToday)
-          const _TodayMark(),
-        Text(day, style: AppTextStyles.dayBig),
-        // const _SelectionAreaWidget(),
-      ],
+    final model = context.read<CalendarScreenViewModel>();
+    final selectedDay =
+        context.select((CalendarScreenViewModel model) => model.selectedDay);
+    final bool isSelected = CalendarFunctions.isSameDate(selectedDay, date);
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        model.selectDay(date);
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          if (isToday) const _TodayMarkWidget(),
+          Text(day, style: AppTextStyles.dayBig),
+          if(isSelected) const _SelectionAreaWidget(),
+        ],
+      ),
     );
   }
 }
 
-class _TodayMark extends StatelessWidget {
-  const _TodayMark({super.key});
+class _TodayMarkWidget extends StatelessWidget {
+  const _TodayMarkWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -137,4 +146,3 @@ class _SelectionAreaWidget extends StatelessWidget {
     );
   }
 }
-
