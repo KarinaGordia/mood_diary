@@ -55,7 +55,7 @@ class AppBarTodayButton extends StatelessWidget {
         child: Text(
           'Сегодня',
           textAlign: TextAlign.center,
-          style: AppTextStyles.today,
+          style: AppTextStyles.todayButton,
         ),
       ),
     );

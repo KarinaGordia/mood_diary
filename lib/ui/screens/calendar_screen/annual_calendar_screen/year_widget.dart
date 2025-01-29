@@ -17,7 +17,7 @@ class YearWidget extends StatelessWidget {
     return Column(
       spacing: 10,
       children: [
-        Text('$year', style: AppTextStyles.yearBig),
+        Text('$year', style: AppTextStyles.yearTitle),
         MonthGridViewWidget(year: year),
       ],
     );
