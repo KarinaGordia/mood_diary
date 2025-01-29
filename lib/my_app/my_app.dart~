@@ -7,17 +7,17 @@ import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   static final mainNavigation = MainNavigation();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mood Diary',
+      title: 'Flutter Demo',
       theme: AppTheme.defaultTheme,
-      initialRoute: MainNavigationNames.diary,
-      routes: mainNavigation.routes,
-      onGenerateRoute: mainNavigation.onGenerateRoute,
+    initialRoute: MainNavigationNames.diary,
+    //   home: ChangeNotifierProvider(
+    //   create: (_) => EmotionsScreenViewModel(),
+    //   child: const EmotionsScreen(),
+    // ),
     );
   }
 }

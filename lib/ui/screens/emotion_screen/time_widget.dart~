@@ -17,7 +17,7 @@ class TimeWidget extends StatefulWidget {
 
 class _TimeWidgetState extends State<TimeWidget> {
 
-  late CalendarScreenViewModel _calendarScreenViewModel;
+  final _calendarScreenViewModel = CalendarScreenViewModel();
 
   @override
   void initState() {
@@ -52,10 +52,7 @@ class _TimeWidgetState extends State<TimeWidget> {
           style: ButtonStyle(
             padding: const WidgetStatePropertyAll(EdgeInsets.zero),
           ),
-          onPressed: () {
-            _calendarScreenViewModel = CalendarScreenViewModel();
-            model.showCalendar(context, _calendarScreenViewModel);
-            },
+          onPressed: () => model.showCalendar(context, _calendarScreenViewModel),
           icon: SvgPicture.asset(AppImages.calendarIcon),
         ),
       ],

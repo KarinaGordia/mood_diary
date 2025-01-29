@@ -5,52 +5,68 @@ import 'package:mood_diary/ui/theme/app_colors.dart';
 abstract class AppTextStyles {
 
   //display
-  final monthBig = TextStyle(
-    fontFamily: GoogleFonts.nunito().fontFamily,
-    fontWeight: FontWeight.w700,
-    fontSize: 24,
-    height: 22 / 24,
-    color: AppColors.grey2,
-  );
+
 
   static TextStyle appBarTimeTitle = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 18,
-    height: 22 / 18,
     color: AppColors.grey2,
   );
 
-  final year = TextStyle(
+  static TextStyle today = TextStyle(
+    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    color: AppColors.grey2,
+  );
+
+
+  static final dayBig = TextStyle(
+    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: AppColors.black,
+  );
+
+  final day = TextStyle(
+    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    color: AppColors.black,
+  );
+
+  static final monthBig = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w700,
-    fontSize: 16,
-    height: 22 / 16,
-    color: AppColors.grey2,
+    fontSize: 24,
+    color: AppColors.black,
   );
 
   final month = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 14,
-    color: AppColors.grey2,
-  );
-
-  final today = TextStyle(
-    fontFamily: GoogleFonts.nunito().fontFamily,
-    fontWeight: FontWeight.w600,
-    fontSize: 18,
-    height: 22 / 18,
-    color: AppColors.grey2,
+    color: AppColors.black,
   );
 
 //body
-  final yearBig = TextStyle(
+  static final yearBig = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w800,
     fontSize: 26,
     color: AppColors.black,
   );
+
+  static final year = TextStyle(
+    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    color: AppColors.grey2,
+  );
+
+
+
 
   static TextStyle sectionTitle = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
@@ -99,20 +115,14 @@ abstract class AppTextStyles {
     fontSize: 12,
     color: AppColors.black,
   );
-
-  final dayBig = TextStyle(
+  static TextStyle daysOfWeek = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
-    fontWeight: FontWeight.w500,
-    fontSize: 18,
-    height: 20/18,
-    color: AppColors.black,
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    color: AppColors.grey2,
   );
 
-  final day = TextStyle(
-    fontFamily: GoogleFonts.nunito().fontFamily,
-    fontWeight: FontWeight.w500,
-    fontSize: 10,
-    // height: 20/18,
-    color: AppColors.black,
-  );
+
+
+
 }
