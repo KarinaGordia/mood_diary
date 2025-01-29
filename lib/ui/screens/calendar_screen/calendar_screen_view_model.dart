@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:mood_diary/ui/navigation/main_navigation.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/annual_calendar_screen/annual_calendar_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +20,9 @@ abstract class CalendarFunctions {
 
 class CalendarScreenViewModel extends ChangeNotifier {
   CalendarScreenViewModel() {
+    log('calendar screen view model constructor');
     _selectedDay = CalendarFunctions.todayFormatted;
-    _selectedMonthDate = CalendarFunctions.todayFormatted;
+    _selectedMonth = CalendarFunctions.todayFormatted;
   }
 
   static const russianDaysOfWeek = <String>[
@@ -47,12 +51,12 @@ class CalendarScreenViewModel extends ChangeNotifier {
   ];
 
   late DateTime _selectedDay;
-  late DateTime _selectedMonthDate;
+  late DateTime _selectedMonth;
   int? _selectedYear;
 
   DateTime get selectedDay => _selectedDay;
 
-  DateTime get selectedMonthDate => _selectedMonthDate;
+  DateTime get selectedMonth => _selectedMonth;
 
   int? get selectedYear => _selectedYear;
 
@@ -63,10 +67,15 @@ class CalendarScreenViewModel extends ChangeNotifier {
     }
   }
 
+  void selectMonth(DateTime monthDate) {
+    if (_selectedMonth != monthDate) {
+      _selectedMonth = monthDate;
+    }
+  }
+
   void selectYear(int year) {
     if (_selectedYear != year) {
       _selectedYear = year;
-      notifyListeners();
     }
   }
 
@@ -94,15 +103,18 @@ class CalendarScreenViewModel extends ChangeNotifier {
     return cells;
   }
 
-  void showCalendar(BuildContext context, int selectedYear) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider.value(
-            value: this,
-            child: AnnualCalendarScreen(
-              year: selectedYear,
-            )),
-      ),
+  void showMonthlyCalendar(BuildContext context) {
+    log('navigate to monthly calendar');
+    Navigator.of(context).pushNamed(
+      MainNavigationNames.monthlyCalendar,
+    );
+  }
+
+  void showAnnualCalendar(BuildContext context) {
+    log('navigate to annual calendar');
+    Navigator.of(context).pushNamed(
+      MainNavigationNames.annualCalendar,
+      arguments: this,
     );
   }
 }

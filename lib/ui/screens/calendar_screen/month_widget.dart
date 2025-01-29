@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +31,10 @@ class MonthWidget extends StatelessWidget {
         if (description.showYear)
           GestureDetector(
             onTap: () {
-              model.showCalendar(context, monthDate.year);
+              log('select year ${monthDate.year}');
+              model.selectYear(monthDate.year);
+              log('show annual calendar');
+              model.showAnnualCalendar(context);
             },
             child: Text(
               year,

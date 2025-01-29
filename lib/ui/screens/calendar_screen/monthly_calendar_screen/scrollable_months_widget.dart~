@@ -39,15 +39,15 @@ class ScrollableMonthsWidget extends StatelessWidget {
         anchor: 0,
         center: _initialMonthKey,
         slivers: [
-          _getList(false, model.selectedMonth),
+          _getList(false, model.selectedMonthDate),
           SliverToBoxAdapter(
             key: _initialMonthKey,
             child: MonthWidget(
-              monthDate: model.selectedMonth,
+              monthDate: model.selectedMonthDate,
               description: MonthlyCalendarMonthDescription(),
             ),
           ),
-          _getList(true, model.selectedMonth),
+          _getList(true, model.selectedMonthDate),
         ],
       )
     );
