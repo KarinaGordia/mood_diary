@@ -4,14 +4,9 @@ import 'package:mood_diary/ui/screens/calendar_screen/month_widget.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/month_widget_description.dart';
 import 'package:provider/provider.dart';
 
-class ScrollableMonthsWidget extends StatefulWidget {
-  const ScrollableMonthsWidget({super.key});
+class ScrollableMonthsWidget extends StatelessWidget {
+  ScrollableMonthsWidget({super.key});
 
-  @override
-  State<ScrollableMonthsWidget> createState() => _ScrollableMonthsWidgetState();
-}
-
-class _ScrollableMonthsWidgetState extends State<ScrollableMonthsWidget> {
   final UniqueKey _initialMonthKey = UniqueKey();
 
   Widget _getList(bool isForward, DateTime date) {
@@ -34,39 +29,12 @@ class _ScrollableMonthsWidgetState extends State<ScrollableMonthsWidget> {
     );
   }
 
-  void _getFixedHeight(BuildContext context) {
-    final model = context.read<CalendarScreenViewModel>();
-    if(model.yearTextKey.currentContext != null) {
-      final RenderBox yearTextRenderBox = model.yearTextKey.currentContext
-          ?.findRenderObject() as RenderBox;
-      final RenderBox monthTextRenderBox = model.monthTextKey.currentContext
-          ?.findRenderObject() as RenderBox;
-      final RenderBox dayCellRenderBox = model.dayCellKey.currentContext
-          ?.findRenderObject() as RenderBox;
-      model.yearTextHeight = yearTextRenderBox.size.height;
-      model.monthTextHeight = monthTextRenderBox.size.height;
-      model.dayCellHeight = dayCellRenderBox.size.height;
-    }
-  }
-
-  @override
-  void initState() {
-    final model = context.read<CalendarScreenViewModel>();
-
-    if(model.yearTextHeight == 0) {
-      WidgetsBinding.instance.addPostFrameCallback((_) =>  _getFixedHeight(context));
-    }
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final model = context.read<CalendarScreenViewModel>();
 
     return Expanded(
       child: CustomScrollView(
-        controller: model.monthlyCalendarController,
         scrollDirection: Axis.vertical,
         anchor: 0,
         center: _initialMonthKey,

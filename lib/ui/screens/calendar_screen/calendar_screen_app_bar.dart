@@ -42,19 +42,12 @@ class AppBarTodayButton extends StatelessWidget {
     final showMonthlyCalendar = context.read<CalendarScreenViewModel>().showMonthlyCalendar;
     final isMonthlyCalendar =
         context.read<CalendarScreenViewModel>().isMonthlyCalendarMode;
-    final model = context.read<CalendarScreenViewModel>();
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
       child: TextButton(
         onPressed: () {
           if (isMonthlyCalendar) {
-            double offset = model.calculateOffsetToCurrentMonth();
-            model.monthlyCalendarController.animateTo(
-              offset,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-            );
-            model.selectDay(CalendarFunctions.todayFormatted);
+            //тут будет прокрутка к текущему месяцу
           } else {
             showMonthlyCalendar(context);
           }
