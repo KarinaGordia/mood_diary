@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -31,13 +29,12 @@ class MonthWidget extends StatelessWidget {
         if (description.showYear)
           GestureDetector(
             onTap: () {
-              log('select year ${monthDate.year}');
               model.selectYear(monthDate.year);
-              log('show annual calendar');
               model.showAnnualCalendar(context);
             },
             child: Text(
               year,
+              key: CalendarFunctions.isCurrentMonth(monthDate) ? model.yearTextKey : null,
               style: TextStyle(
                 fontFamily: GoogleFonts.nunito().fontFamily,
                 fontWeight: FontWeight.w700,
@@ -48,6 +45,7 @@ class MonthWidget extends StatelessWidget {
           ),
         Text(
           month,
+          key: CalendarFunctions.isCurrentMonth(monthDate) ? model.monthTextKey : null,
           style: TextStyle(
             fontFamily: GoogleFonts.nunito().fontFamily,
             fontWeight: FontWeight.w700,
@@ -80,6 +78,8 @@ class _DayCellBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.read<CalendarScreenViewModel>();
+
     return GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -97,8 +97,10 @@ class _DayCellBuilderWidget extends StatelessWidget {
             return Container();
           }
 
+          bool isToday = CalendarFunctions.isToday(date);
           return _DayCellWidget(
             date: date,
+            key: isToday ? model.dayCellKey : null,
             description: description,
           );
         });

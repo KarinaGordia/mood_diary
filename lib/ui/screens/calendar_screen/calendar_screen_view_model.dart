@@ -11,8 +11,77 @@ abstract class CalendarFunctions {
     return todayFormatted.compareTo(date) == 0;
   }
 
+  static bool isCurrentMonth(DateTime date) {
+    return DateTime(DateTime.now().year, DateTime.now().month)
+            .compareTo(DateTime(date.year, date.month)) ==
+        0;
+  }
+
   static bool isSameDate(DateTime firstDate, DateTime secondDate) {
     return firstDate.compareTo(secondDate) == 0;
+  }
+}
+
+class OffsetCalculator {
+   OffsetCalculator({
+    required this.currentMonth,
+    required this.yearTextHeight,
+    required this.monthTextHeight,
+    required this.dayCellHeight,
+  });
+
+  final DateTime currentMonth;
+  final double yearTextHeight;
+  final double monthTextHeight;
+  final double dayCellHeight;
+
+  Map<int, double> monthHeights = {};
+
+  double calculateOffsetBetweenMonths(DateTime selected) {
+    final isCurrentMonth = CalendarFunctions.isCurrentMonth(selected);
+    double totalOffset = 0;
+
+    if (isCurrentMonth) return totalOffset;
+
+    DateTime startDate =
+        currentMonth.isBefore(selected) ? currentMonth : selected;
+    DateTime endDate =
+        currentMonth.isBefore(selected) ? selected : currentMonth;
+
+    while (startDate.isBefore(endDate)) {
+      int weeksInMonth = getWeeksInMonth(startDate);
+      double monthHeight = calculateMonthHeight(weeksInMonth);
+      totalOffset += monthHeight;
+
+      startDate = DateTime(startDate.year, startDate.month + 1, 1);
+    }
+
+    return currentMonth.isBefore(selected) ? -totalOffset : totalOffset;
+  }
+
+  int getWeeksInMonth(DateTime date) {
+    DateTime firstDayOfMonth = DateTime(date.year, date.month, 1);
+    DateTime lastDayOfMonth = DateTime(date.year, date.month + 1, 0);
+    int firstDayWeekday = firstDayOfMonth.weekday;
+    int daysInMonth = lastDayOfMonth.day;
+    int totalDaysWithOffset = firstDayWeekday - 1 + daysInMonth;
+    int weeks = (totalDaysWithOffset / 7).ceil();
+
+    return weeks;
+  }
+
+  double calculateMonthHeight(int weeksInMonth) {
+    final heightFromMap = monthHeights[weeksInMonth];
+    if (monthHeights[weeksInMonth] != null) {
+      return heightFromMap!;
+    }
+
+    const heightBetweenYearAndMonth = 10.0;
+    double fixedHeight =
+        yearTextHeight + monthTextHeight + heightBetweenYearAndMonth;
+    double monthHeight = fixedHeight + (weeksInMonth * dayCellHeight);
+    monthHeights[weeksInMonth] = monthHeight;
+    return monthHeight;
   }
 }
 
@@ -21,6 +90,10 @@ class CalendarScreenViewModel extends ChangeNotifier {
     log('calendar screen view model constructor');
     _selectedDay = CalendarFunctions.todayFormatted;
     _selectedMonth = CalendarFunctions.todayFormatted;
+    monthlyCalendarController = ScrollController();
+    yearTextKey = GlobalKey();
+    monthTextKey = GlobalKey();
+    dayCellKey = GlobalKey();
   }
 
   static const russianDaysOfWeek = <String>[
@@ -48,9 +121,14 @@ class CalendarScreenViewModel extends ChangeNotifier {
     'Декабрь',
   ];
 
+  late final ScrollController monthlyCalendarController;
   late DateTime _selectedDay;
   late DateTime _selectedMonth;
   int? _selectedYear;
+
+  late final GlobalKey yearTextKey;
+  late final GlobalKey monthTextKey;
+  late final GlobalKey dayCellKey;
 
   DateTime get selectedDay => _selectedDay;
 
@@ -61,6 +139,22 @@ class CalendarScreenViewModel extends ChangeNotifier {
   bool _isMonthlyCalendarMode = true;
 
   bool get isMonthlyCalendarMode => _isMonthlyCalendarMode;
+
+  double yearTextHeight = 0;
+  double monthTextHeight = 0;
+  double dayCellHeight = 0;
+  double calculateOffsetToCurrentMonth() {
+    final offsetCalculator = OffsetCalculator(
+      currentMonth: _selectedMonth,
+      yearTextHeight: yearTextHeight,
+      monthTextHeight: monthTextHeight,
+      dayCellHeight: dayCellHeight,
+    );
+
+    final offset = offsetCalculator.calculateOffsetBetweenMonths(_selectedMonth);
+
+    return offset;
+  }
 
   void selectDay(DateTime date) {
     if (_selectedDay != date) {
@@ -121,5 +215,11 @@ class CalendarScreenViewModel extends ChangeNotifier {
       MainNavigationNames.annualCalendar,
       arguments: this,
     );
+  }
+
+  @override
+  void dispose() {
+    monthlyCalendarController.dispose();
+    super.dispose();
   }
 }
