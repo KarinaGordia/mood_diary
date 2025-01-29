@@ -32,7 +32,7 @@ class ScrollableCalendarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.read<CalendarScreenViewModel>();
-    final selectedDate = model.selectedMonthDate ?? model.today;
+    final selectedDate = model.selectedMonthDate ?? CalendarFunctions.todayFormatted;
 
     return Expanded(
       child: CustomScrollView(

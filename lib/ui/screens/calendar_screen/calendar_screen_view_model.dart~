@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 
-abstract class CalendarFunctions {
-  static DateTime todayFormatted = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-
-  static bool isToday(DateTime date) {
-    return todayFormatted.compareTo(date) == 0;
-  }
-}
-
-class CalendarScreenViewModel extends ChangeNotifier {
+class CalendarScreenViewModel extends ChangeNotifier{
   CalendarScreenViewModel() {
-    selectedMonthDate = CalendarFunctions.todayFormatted;
+    selectedMonthDate = today;
   }
-
   static const russianDaysOfWeek = <String>[
     'ПН',
     'ВТ',
@@ -38,6 +29,10 @@ class CalendarScreenViewModel extends ChangeNotifier {
     'Декабрь',
   ];
 
+  final _today = DateTime.now();
+
+  DateTime get today => DateTime(_today.year, _today.month, _today.day);
+
   DateTime? selectedMonthDate;
 
   List<DateTime> generateMonthCells(DateTime monthDate) {
@@ -50,11 +45,11 @@ class CalendarScreenViewModel extends ChangeNotifier {
 
     var firstDayOfWeek = firstDayDt.weekday;
     var previousMonthDays =
-        DateUtils.getDaysInMonth(previousMonthDt.year, previousMonthDt.month);
+    DateUtils.getDaysInMonth(previousMonthDt.year, previousMonthDt.month);
 
     var previousMonthCells = List.generate(
         firstDayOfWeek - 1,
-        (index) => DateTime(previousMonthDt.year, previousMonthDt.month,
+            (index) => DateTime(previousMonthDt.year, previousMonthDt.month,
             previousMonthDays - index));
     cells.addAll(previousMonthCells.reversed);
 
@@ -64,5 +59,3 @@ class CalendarScreenViewModel extends ChangeNotifier {
     return cells;
   }
 }
-
-

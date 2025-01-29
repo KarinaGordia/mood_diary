@@ -98,7 +98,7 @@ class _DayCellWidget extends StatelessWidget {
         if(isToday)
           const _TodayMark(),
         Text(day, style: AppTextStyles.dayBig),
-        // const _SelectionAreaWidget(),
+        const _SelectingMark(),
       ],
     );
   }
@@ -123,8 +123,8 @@ class _TodayMark extends StatelessWidget {
   }
 }
 
-class _SelectionAreaWidget extends StatelessWidget {
-  const _SelectionAreaWidget({super.key});
+class _SelectingMark extends StatelessWidget {
+  const _SelectingMark({super.key});
 
   @override
   Widget build(BuildContext context) {
