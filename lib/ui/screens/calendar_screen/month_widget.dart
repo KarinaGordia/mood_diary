@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/month_widget_description.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
-import 'package:mood_diary/ui/theme/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class MonthWidget extends StatelessWidget {
   const MonthWidget({
     super.key,
     required this.monthDate,
+    required this.description,
   });
 
   final DateTime monthDate;
+  final MonthDescription description;
 
   @override
   Widget build(BuildContext context) {
@@ -24,35 +26,52 @@ class MonthWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          year,
-          style: AppTextStyles.year,
-        ),
+        if (description.showYear)
+          GestureDetector(
+            onTap: () {
+              model.showCalendar(context, monthDate.year);
+            },
+            child: Text(
+              year,
+              style: TextStyle(
+                fontFamily: GoogleFonts.nunito().fontFamily,
+                fontWeight: FontWeight.w700,
+                fontSize: description.yearFontSize,
+                color: AppColors.grey2,
+              ),
+            ),
+          ),
         Text(
           month,
-          style: AppTextStyles.monthBig,
+          style: TextStyle(
+            fontFamily: GoogleFonts.nunito().fontFamily,
+            fontWeight: FontWeight.w700,
+            fontSize: description.monthFontSize,
+            color: AppColors.black,
+          ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        DayCellBuilderWidget(
+        const SizedBox(height: 10),
+        _DayCellBuilderWidget(
           month: monthDate.month,
           cells: model.generateMonthCells(monthDate),
+          description: description,
         )
       ],
     );
   }
 }
 
-class DayCellBuilderWidget extends StatelessWidget {
-  const DayCellBuilderWidget({
+class _DayCellBuilderWidget extends StatelessWidget {
+  const _DayCellBuilderWidget({
     super.key,
     required this.month,
     required this.cells,
+    required this.description,
   });
 
   final List<DateTime> cells;
   final int month;
+  final MonthDescription description;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +81,7 @@ class DayCellBuilderWidget extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 7,
           mainAxisSpacing: 0,
-          crossAxisSpacing: 8,
+          crossAxisSpacing: description.cellBuilderCrossAxisSpacing,
         ),
         itemCount: cells.length,
         itemBuilder: (context, index) {
@@ -75,6 +94,7 @@ class DayCellBuilderWidget extends StatelessWidget {
 
           return _DayCellWidget(
             date: date,
+            description: description,
           );
         });
   }
@@ -84,9 +104,11 @@ class _DayCellWidget extends StatelessWidget {
   const _DayCellWidget({
     super.key,
     required this.date,
+    required this.description,
   });
 
   final DateTime date;
+  final MonthDescription description;
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +126,19 @@ class _DayCellWidget extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          if (isToday) const _TodayMarkWidget(),
-          Text(day, style: AppTextStyles.dayBig),
-          if(isSelected) const _SelectionAreaWidget(),
+          if (isToday)
+            _TodayMarkWidget(size: description.todayMarkSize,),
+          Text(
+            day,
+            style: TextStyle(
+              fontFamily: GoogleFonts.nunito().fontFamily,
+              fontWeight: FontWeight.w500,
+              fontSize: description.dayFontSize,
+              color: AppColors.black,
+            ),
+          ),
+          if (isSelected)
+            const _SelectionAreaWidget(),
         ],
       ),
     );
@@ -114,15 +146,16 @@ class _DayCellWidget extends StatelessWidget {
 }
 
 class _TodayMarkWidget extends StatelessWidget {
-  const _TodayMarkWidget({super.key});
+  const _TodayMarkWidget({super.key, required this.size});
 
+  final double size;
   @override
   Widget build(BuildContext context) {
     return Positioned(
       top: 35,
       child: Container(
-        width: 5,
-        height: 5,
+        width: size,
+        height: size,
         decoration: const BoxDecoration(
           color: AppColors.mandarin,
           shape: BoxShape.circle,
