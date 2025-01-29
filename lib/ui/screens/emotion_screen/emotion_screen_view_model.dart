@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/resources/app_images.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
+import 'package:provider/provider.dart';
 
 class EmotionsScreenViewModel extends ChangeNotifier {
   final _feelings = <Feeling>[
@@ -174,7 +177,7 @@ class EmotionsScreenViewModel extends ChangeNotifier {
   }
 
   void resetSelection() {
-    for(var feeling in _feelings) {
+    for (var feeling in _feelings) {
       feeling.isSelected = false;
     }
 
@@ -219,4 +222,15 @@ class EmotionsScreenViewModel extends ChangeNotifier {
 
   String createTitle() =>
       '$day ${russianMonthsInGenitiveCase[monthIndex]} $time';
+
+  void showCalendar(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (_) => CalendarScreenViewModel(),
+          child: CalendarScreen(),
+        ),
+      ),
+    );
+  }
 }

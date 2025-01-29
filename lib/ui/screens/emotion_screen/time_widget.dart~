@@ -48,7 +48,7 @@ class _TimeWidgetState extends State<TimeWidget> {
           style: ButtonStyle(
             padding: const WidgetStatePropertyAll(EdgeInsets.zero),
           ),
-          onPressed: () => model.showCalendar(context),
+          onPressed: () {},
           icon: SvgPicture.asset(AppImages.calendarIcon),
         ),
       ],
