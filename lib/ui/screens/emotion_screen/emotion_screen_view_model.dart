@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/resources/app_images.dart';
-import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/monthly_calendar_screen/monthly_calendar_screen.dart';
 import 'package:provider/provider.dart';
 
 class EmotionsScreenViewModel extends ChangeNotifier {
@@ -228,7 +226,7 @@ class EmotionsScreenViewModel extends ChangeNotifier {
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider(
           create: (_) => CalendarScreenViewModel(),
-          child: CalendarScreen(),
+          child: MonthlyCalendarScreen(),
         ),
       ),
     );

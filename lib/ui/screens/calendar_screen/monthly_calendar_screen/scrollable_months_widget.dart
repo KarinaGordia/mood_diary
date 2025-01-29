@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/month_widget.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/month_widget_description.dart';
 import 'package:provider/provider.dart';
 
-class ScrollableCalendarWidget extends StatelessWidget {
-  ScrollableCalendarWidget({super.key});
+class ScrollableMonthsWidget extends StatelessWidget {
+  ScrollableMonthsWidget({super.key});
 
   final UniqueKey _initialMonthKey = UniqueKey();
 
@@ -22,6 +21,7 @@ class ScrollableCalendarWidget extends StatelessWidget {
         } else {
           child = MonthWidget(
             monthDate: monthDate,
+            description: MonthlyCalendarMonthDescription(),
           );
         }
         return child;
@@ -44,6 +44,7 @@ class ScrollableCalendarWidget extends StatelessWidget {
             key: _initialMonthKey,
             child: MonthWidget(
               monthDate: model.selectedMonthDate,
+              description: MonthlyCalendarMonthDescription(),
             ),
           ),
           _getList(true, model.selectedMonthDate),

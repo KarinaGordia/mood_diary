@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
-import 'package:mood_diary/ui/screens/calendar_screen/monthly_calendar/scrollable_calendar_widget.dart';
+import 'package:mood_diary/ui/screens/calendar_screen/monthly_calendar_screen/scrollable_months_widget.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
 
-class MonthlyCalendar extends StatelessWidget {
-  const MonthlyCalendar({super.key});
+class MonthlyCalendarScreen extends StatelessWidget {
+  const MonthlyCalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const DaysOfWeekRow(),
-        ScrollableCalendarWidget(),
+        ScrollableMonthsWidget(),
       ],
     );
   }
