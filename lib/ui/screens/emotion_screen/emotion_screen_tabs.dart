@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_diary/resources/app_icons.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/mood_diary_tab/mood_diary_tab.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
+import 'package:mood_diary/ui/theme/app_text_styles.dart';
 
 class EmotionScreenTabs extends StatefulWidget {
   const EmotionScreenTabs({super.key});
@@ -65,7 +66,7 @@ class _EmotionScreenTabsState extends State<EmotionScreenTabs>
                   Center(
                     child: Text(
                       'Здесь будет отображаться ваша статистика',
-                      style: Theme.of(context).textTheme.labelLarge,
+                      style: AppTextStyles.sectionTitle,
                     ),
                   ),
                 ],

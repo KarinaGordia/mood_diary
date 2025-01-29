@@ -39,11 +39,11 @@ class NotesSection extends StatelessWidget {
               minLines: null,
               maxLines: null,
               expands: true,
-              style: AppTextStyles.contentTextStyle,
+              style: contentTextStyle,
               cursorColor: AppColors.black,
               decoration: InputDecoration.collapsed(
                   hintText: 'Введите заметку',
-                  hintStyle: AppTextStyles.hintTextStyle),
+                  hintStyle: hintTextStyle),
               autofocus: false,
               onChanged: model.takeNote,
               textInputAction: TextInputAction.done,

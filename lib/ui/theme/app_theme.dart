@@ -86,5 +86,25 @@ abstract class AppTheme {
         ),
       ),
     ),
+    textTheme: TextTheme(
+      displaySmall: TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 18,
+        height: 22 / 18,
+        color: AppColors.grey2,
+      ),
+      bodyLarge: TextStyle(
+  fontFamily: GoogleFonts.nunito().fontFamily,
+  fontWeight: FontWeight.w800,
+  fontSize: 16,
+  color: AppColors.black,),
+      labelLarge: TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        color: AppColors.black,
+      ),
+    ),
   );
 }
