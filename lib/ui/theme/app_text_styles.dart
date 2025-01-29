@@ -5,7 +5,7 @@ import 'package:mood_diary/ui/theme/app_colors.dart';
 abstract class AppTextStyles {
 
   //display
-  final monthBig = TextStyle(
+  static final monthBig = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 24,
@@ -21,7 +21,7 @@ abstract class AppTextStyles {
     color: AppColors.grey2,
   );
 
-  final year = TextStyle(
+  static final year = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 16,
@@ -99,6 +99,12 @@ abstract class AppTextStyles {
     fontSize: 12,
     color: AppColors.black,
   );
+  static TextStyle daysOfWeek = TextStyle(
+    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    color: AppColors.grey2,
+  );
 
   final dayBig = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
@@ -115,4 +121,6 @@ abstract class AppTextStyles {
     // height: 20/18,
     color: AppColors.black,
   );
+
+
 }
