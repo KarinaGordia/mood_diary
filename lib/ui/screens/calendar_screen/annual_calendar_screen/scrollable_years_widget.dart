@@ -36,6 +36,5 @@ class ScrollableYearsWidget extends StatelessWidget {
         _getList(true, selectedYear),
       ],
     );
-    ;
   }
 }

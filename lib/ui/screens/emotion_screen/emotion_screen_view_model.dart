@@ -222,7 +222,7 @@ class EmotionsScreenViewModel extends ChangeNotifier {
   String createTitle() =>
       '$day ${russianMonthsInGenitiveCase[monthIndex]} $time';
 
-  void showCalendar(BuildContext context) {
-    Navigator.of(context).pushNamed(MainNavigationNames.monthlyCalendar);
+  void showCalendar(BuildContext context, CalendarScreenViewModel model) {
+    Navigator.of(context).pushNamed(MainNavigationNames.monthlyCalendar, arguments: model);
   }
 }

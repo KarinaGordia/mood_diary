@@ -107,6 +107,7 @@ class CalendarScreenViewModel extends ChangeNotifier {
     log('navigate to monthly calendar');
     Navigator.of(context).pushNamed(
       MainNavigationNames.monthlyCalendar,
+      arguments: this,
     );
   }
 

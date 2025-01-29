@@ -18,6 +18,10 @@ class MainNavigation {
           create: (_) => EmotionsScreenViewModel(),
           child: const EmotionsScreen(),
         ),
+    // MainNavigationNames.monthlyCalendar: (_) => ChangeNotifierProvider(
+    //       create: (_) => CalendarScreenViewModel(),
+    //       child: MonthlyCalendarScreen(),
+    //     ),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
