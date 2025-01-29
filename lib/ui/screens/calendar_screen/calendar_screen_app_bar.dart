@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mood_diary/resources/app_icons.dart';
-import 'package:mood_diary/ui/navigation/main_navigation.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';

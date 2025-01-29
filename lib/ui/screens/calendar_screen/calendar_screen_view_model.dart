@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:mood_diary/ui/navigation/main_navigation.dart';
-import 'package:mood_diary/ui/screens/calendar_screen/annual_calendar_screen/annual_calendar_screen.dart';
-import 'package:provider/provider.dart';
 
 abstract class CalendarFunctions {
   static DateTime todayFormatted =

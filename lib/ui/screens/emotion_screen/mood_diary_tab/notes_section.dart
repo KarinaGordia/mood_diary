@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mood_diary/ui/screens/emotion_screen/emotion_screen_view_model.dart';
 import 'package:mood_diary/ui/theme/app_colors.dart';
 import 'package:mood_diary/ui/theme/app_text_styles.dart';
