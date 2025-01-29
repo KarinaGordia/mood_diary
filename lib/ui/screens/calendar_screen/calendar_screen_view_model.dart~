@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/annual_calendar_screen/annual_calendar_screen.dart';
-import 'package:provider/provider.dart';
 
 abstract class CalendarFunctions {
-  static DateTime todayFormatted =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  static DateTime todayFormatted = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
   static bool isToday(DateTime date) {
     return todayFormatted.compareTo(date) == 0;
@@ -51,20 +49,18 @@ class CalendarScreenViewModel extends ChangeNotifier {
   int? _selectedYear;
 
   DateTime get selectedDay => _selectedDay;
-
   DateTime get selectedMonthDate => _selectedMonthDate;
-
   int? get selectedYear => _selectedYear;
 
   void selectDay(DateTime date) {
-    if (_selectedDay != date) {
+    if(_selectedDay != date) {
       _selectedDay = date;
       notifyListeners();
     }
   }
 
   void selectYear(int year) {
-    if (_selectedYear != year) {
+    if(_selectedYear != year) {
       _selectedYear = year;
       notifyListeners();
     }
@@ -97,12 +93,10 @@ class CalendarScreenViewModel extends ChangeNotifier {
   void showCalendar(BuildContext context, int selectedYear) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider.value(
-            value: this,
-            child: AnnualCalendarScreen(
-              year: selectedYear,
-            )),
-      ),
-    );
+        builder: (context) => AnnualCalendarScreen(year: selectedYear,),
+        ),
+      );
   }
 }
+
+
