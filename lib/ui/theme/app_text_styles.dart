@@ -10,7 +10,7 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 24,
     height: 22 / 24,
-    color: AppColors.grey2,
+    color: AppColors.black,
   );
 
   static TextStyle appBarTimeTitle = TextStyle(
@@ -106,7 +106,7 @@ abstract class AppTextStyles {
     color: AppColors.grey2,
   );
 
-  final dayBig = TextStyle(
+  static final dayBig = TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 18,
