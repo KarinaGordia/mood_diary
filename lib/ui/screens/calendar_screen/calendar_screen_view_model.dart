@@ -60,6 +60,10 @@ class CalendarScreenViewModel extends ChangeNotifier {
 
   int? get selectedYear => _selectedYear;
 
+  bool _isMonthlyCalendarMode = true;
+
+  bool get isMonthlyCalendarMode => _isMonthlyCalendarMode;
+
   void selectDay(DateTime date) {
     if (_selectedDay != date) {
       _selectedDay = date;
@@ -104,6 +108,7 @@ class CalendarScreenViewModel extends ChangeNotifier {
   }
 
   void showMonthlyCalendar(BuildContext context) {
+    _isMonthlyCalendarMode = true;
     log('navigate to monthly calendar');
     Navigator.of(context).pushNamed(
       MainNavigationNames.monthlyCalendar,
@@ -112,6 +117,7 @@ class CalendarScreenViewModel extends ChangeNotifier {
   }
 
   void showAnnualCalendar(BuildContext context) {
+    _isMonthlyCalendarMode = false;
     log('navigate to annual calendar');
     Navigator.of(context).pushNamed(
       MainNavigationNames.annualCalendar,

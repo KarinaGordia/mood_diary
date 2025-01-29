@@ -4,8 +4,7 @@ import 'package:mood_diary/domain/entity/feeling.dart';
 import 'package:mood_diary/resources/app_images.dart';
 import 'package:mood_diary/ui/navigation/main_navigation.dart';
 import 'package:mood_diary/ui/screens/calendar_screen/calendar_screen_view_model.dart';
-import 'package:mood_diary/ui/screens/calendar_screen/monthly_calendar_screen/monthly_calendar_screen.dart';
-import 'package:provider/provider.dart';
+
 
 class EmotionsScreenViewModel extends ChangeNotifier {
   final _feelings = <Feeling>[
