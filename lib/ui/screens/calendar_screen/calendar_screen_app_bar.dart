@@ -39,6 +39,7 @@ class AppBarTodayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.read<CalendarScreenViewModel>();
     final showMonthlyCalendar = context.read<CalendarScreenViewModel>().showMonthlyCalendar;
     final isMonthlyCalendar =
         context.read<CalendarScreenViewModel>().isMonthlyCalendarMode;
@@ -49,6 +50,7 @@ class AppBarTodayButton extends StatelessWidget {
           if (isMonthlyCalendar) {
             //тут будет прокрутка к текущему месяцу
           } else {
+            model.selectMonth(CalendarFunctions.todayFormatted);
             showMonthlyCalendar(context);
           }
         },
